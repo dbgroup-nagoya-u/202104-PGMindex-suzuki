@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcpgmindexlib.a  CMakeFiles/cpgmindexlib.dir/cpgm.cpp.o
+/usr/bin/ranlib libcpgmindexlib.a

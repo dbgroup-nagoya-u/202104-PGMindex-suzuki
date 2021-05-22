@@ -1,0 +1,1 @@
+/usr/bin/c++   -march=native -O3 -DNDEBUG   CMakeFiles/example_updates.dir/updates.cpp.o  -o example_updates  /usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so /usr/lib/x86_64-linux-gnu/libpthread.so 
