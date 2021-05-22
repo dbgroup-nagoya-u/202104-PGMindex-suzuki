@@ -8,6 +8,7 @@
 /home/ssuzuki/workspace/PGM/build/examples/CMakeFiles/rebuild_cache.dir
 /home/ssuzuki/workspace/PGM/build/examples/CMakeFiles/edit_cache.dir
 /home/ssuzuki/workspace/PGM/build/examples/CMakeFiles/test.dir
+/home/ssuzuki/workspace/PGM/build/examples/CMakeFiles/example_2dimensional.dir
 /home/ssuzuki/workspace/PGM/build/examples/CMakeFiles/example_multidimensional.dir
 /home/ssuzuki/workspace/PGM/build/examples/CMakeFiles/example_updates.dir
 /home/ssuzuki/workspace/PGM/build/examples/CMakeFiles/example_simple.dir

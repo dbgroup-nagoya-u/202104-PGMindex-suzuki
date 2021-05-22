@@ -135,6 +135,19 @@ tuner/fast:
 .PHONY : tuner/fast
 
 #=============================================================================
+# Target rules for targets named example_2dimensional
+
+# Build rule for target.
+example_2dimensional: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 example_2dimensional
+.PHONY : example_2dimensional
+
+# fast build rule for target.
+example_2dimensional/fast:
+	$(MAKE) -f examples/CMakeFiles/example_2dimensional.dir/build.make examples/CMakeFiles/example_2dimensional.dir/build
+.PHONY : example_2dimensional/fast
+
+#=============================================================================
 # Target rules for targets named example_multidimensional
 
 # Build rule for target.
@@ -274,6 +287,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... tuner"
+	@echo "... example_2dimensional"
 	@echo "... example_multidimensional"
 	@echo "... example_updates"
 	@echo "... example_simple"

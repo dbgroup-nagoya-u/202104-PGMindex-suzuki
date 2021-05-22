@@ -122,6 +122,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+examples/CMakeFiles/example_2dimensional.dir/rule:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/example_2dimensional.dir/rule
+.PHONY : examples/CMakeFiles/example_2dimensional.dir/rule
+
+# Convenience name for target.
+example_2dimensional: examples/CMakeFiles/example_2dimensional.dir/rule
+
+.PHONY : example_2dimensional
+
+# fast build rule for target.
+example_2dimensional/fast:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f examples/CMakeFiles/example_2dimensional.dir/build.make examples/CMakeFiles/example_2dimensional.dir/build
+.PHONY : example_2dimensional/fast
+
+# Convenience name for target.
 examples/CMakeFiles/example_multidimensional.dir/rule:
 	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/example_multidimensional.dir/rule
 .PHONY : examples/CMakeFiles/example_multidimensional.dir/rule
@@ -195,6 +210,33 @@ example_mapped: examples/CMakeFiles/example_mapped.dir/rule
 example_mapped/fast:
 	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f examples/CMakeFiles/example_mapped.dir/build.make examples/CMakeFiles/example_mapped.dir/build
 .PHONY : example_mapped/fast
+
+2dimensional.o: 2dimensional.cpp.o
+
+.PHONY : 2dimensional.o
+
+# target to build an object file
+2dimensional.cpp.o:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f examples/CMakeFiles/example_2dimensional.dir/build.make examples/CMakeFiles/example_2dimensional.dir/2dimensional.cpp.o
+.PHONY : 2dimensional.cpp.o
+
+2dimensional.i: 2dimensional.cpp.i
+
+.PHONY : 2dimensional.i
+
+# target to preprocess a source file
+2dimensional.cpp.i:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f examples/CMakeFiles/example_2dimensional.dir/build.make examples/CMakeFiles/example_2dimensional.dir/2dimensional.cpp.i
+.PHONY : 2dimensional.cpp.i
+
+2dimensional.s: 2dimensional.cpp.s
+
+.PHONY : 2dimensional.s
+
+# target to generate assembly for a file
+2dimensional.cpp.s:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f examples/CMakeFiles/example_2dimensional.dir/build.make examples/CMakeFiles/example_2dimensional.dir/2dimensional.cpp.s
+.PHONY : 2dimensional.cpp.s
 
 mapped.o: mapped.cpp.o
 
@@ -340,11 +382,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... example_2dimensional"
 	@echo "... example_multidimensional"
 	@echo "... example_updates"
 	@echo "... example_simple"
 	@echo "... example_multiset"
 	@echo "... example_mapped"
+	@echo "... 2dimensional.o"
+	@echo "... 2dimensional.i"
+	@echo "... 2dimensional.s"
 	@echo "... mapped.o"
 	@echo "... mapped.i"
 	@echo "... mapped.s"
