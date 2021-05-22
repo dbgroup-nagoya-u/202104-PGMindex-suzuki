@@ -83,6 +83,7 @@ clean: test/clean
 # Directory level rules for directory benchmark
 
 # Recursive "all" directory target.
+benchmark/all: benchmark/CMakeFiles/2dbench.dir/all
 benchmark/all: benchmark/CMakeFiles/benchmark.dir/all
 
 .PHONY : benchmark/all
@@ -93,6 +94,7 @@ benchmark/preinstall:
 .PHONY : benchmark/preinstall
 
 # Recursive "clean" directory target.
+benchmark/clean: benchmark/CMakeFiles/2dbench.dir/clean
 benchmark/clean: benchmark/CMakeFiles/benchmark.dir/clean
 
 .PHONY : benchmark/clean
@@ -208,7 +210,7 @@ tuner/clean: tuner/CMakeFiles/tuner.dir/clean
 tuner/CMakeFiles/tuner.dir/all:
 	$(MAKE) -f tuner/CMakeFiles/tuner.dir/build.make tuner/CMakeFiles/tuner.dir/depend
 	$(MAKE) -f tuner/CMakeFiles/tuner.dir/build.make tuner/CMakeFiles/tuner.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=24,25 "Built target tuner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=26,27 "Built target tuner"
 .PHONY : tuner/CMakeFiles/tuner.dir/all
 
 # Build rule for subdir invocation for target.
@@ -235,7 +237,7 @@ tuner/CMakeFiles/tuner.dir/clean:
 examples/CMakeFiles/example_2dimensional.dir/all:
 	$(MAKE) -f examples/CMakeFiles/example_2dimensional.dir/build.make examples/CMakeFiles/example_2dimensional.dir/depend
 	$(MAKE) -f examples/CMakeFiles/example_2dimensional.dir/build.make examples/CMakeFiles/example_2dimensional.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=5,6 "Built target example_2dimensional"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=7,8 "Built target example_2dimensional"
 .PHONY : examples/CMakeFiles/example_2dimensional.dir/all
 
 # Build rule for subdir invocation for target.
@@ -262,7 +264,7 @@ examples/CMakeFiles/example_2dimensional.dir/clean:
 examples/CMakeFiles/example_multidimensional.dir/all:
 	$(MAKE) -f examples/CMakeFiles/example_multidimensional.dir/build.make examples/CMakeFiles/example_multidimensional.dir/depend
 	$(MAKE) -f examples/CMakeFiles/example_multidimensional.dir/build.make examples/CMakeFiles/example_multidimensional.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=9,10 "Built target example_multidimensional"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=11,12 "Built target example_multidimensional"
 .PHONY : examples/CMakeFiles/example_multidimensional.dir/all
 
 # Build rule for subdir invocation for target.
@@ -289,7 +291,7 @@ examples/CMakeFiles/example_multidimensional.dir/clean:
 examples/CMakeFiles/example_updates.dir/all:
 	$(MAKE) -f examples/CMakeFiles/example_updates.dir/build.make examples/CMakeFiles/example_updates.dir/depend
 	$(MAKE) -f examples/CMakeFiles/example_updates.dir/build.make examples/CMakeFiles/example_updates.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=17,18 "Built target example_updates"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=19,20 "Built target example_updates"
 .PHONY : examples/CMakeFiles/example_updates.dir/all
 
 # Build rule for subdir invocation for target.
@@ -316,7 +318,7 @@ examples/CMakeFiles/example_updates.dir/clean:
 examples/CMakeFiles/example_simple.dir/all:
 	$(MAKE) -f examples/CMakeFiles/example_simple.dir/build.make examples/CMakeFiles/example_simple.dir/depend
 	$(MAKE) -f examples/CMakeFiles/example_simple.dir/build.make examples/CMakeFiles/example_simple.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=13,14 "Built target example_simple"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=15,16 "Built target example_simple"
 .PHONY : examples/CMakeFiles/example_simple.dir/all
 
 # Build rule for subdir invocation for target.
@@ -343,7 +345,7 @@ examples/CMakeFiles/example_simple.dir/clean:
 examples/CMakeFiles/example_multiset.dir/all:
 	$(MAKE) -f examples/CMakeFiles/example_multiset.dir/build.make examples/CMakeFiles/example_multiset.dir/depend
 	$(MAKE) -f examples/CMakeFiles/example_multiset.dir/build.make examples/CMakeFiles/example_multiset.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=11,12 "Built target example_multiset"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=13,14 "Built target example_multiset"
 .PHONY : examples/CMakeFiles/example_multiset.dir/all
 
 # Build rule for subdir invocation for target.
@@ -370,7 +372,7 @@ examples/CMakeFiles/example_multiset.dir/clean:
 examples/CMakeFiles/example_mapped.dir/all:
 	$(MAKE) -f examples/CMakeFiles/example_mapped.dir/build.make examples/CMakeFiles/example_mapped.dir/depend
 	$(MAKE) -f examples/CMakeFiles/example_mapped.dir/build.make examples/CMakeFiles/example_mapped.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=7,8 "Built target example_mapped"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=9,10 "Built target example_mapped"
 .PHONY : examples/CMakeFiles/example_mapped.dir/all
 
 # Build rule for subdir invocation for target.
@@ -391,13 +393,40 @@ examples/CMakeFiles/example_mapped.dir/clean:
 .PHONY : examples/CMakeFiles/example_mapped.dir/clean
 
 #=============================================================================
+# Target rules for target benchmark/CMakeFiles/2dbench.dir
+
+# All Build rule for target.
+benchmark/CMakeFiles/2dbench.dir/all:
+	$(MAKE) -f benchmark/CMakeFiles/2dbench.dir/build.make benchmark/CMakeFiles/2dbench.dir/depend
+	$(MAKE) -f benchmark/CMakeFiles/2dbench.dir/build.make benchmark/CMakeFiles/2dbench.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=1,2 "Built target 2dbench"
+.PHONY : benchmark/CMakeFiles/2dbench.dir/all
+
+# Build rule for subdir invocation for target.
+benchmark/CMakeFiles/2dbench.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ssuzuki/workspace/PGM/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 benchmark/CMakeFiles/2dbench.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ssuzuki/workspace/PGM/build/CMakeFiles 0
+.PHONY : benchmark/CMakeFiles/2dbench.dir/rule
+
+# Convenience name for target.
+2dbench: benchmark/CMakeFiles/2dbench.dir/rule
+
+.PHONY : 2dbench
+
+# clean rule for target.
+benchmark/CMakeFiles/2dbench.dir/clean:
+	$(MAKE) -f benchmark/CMakeFiles/2dbench.dir/build.make benchmark/CMakeFiles/2dbench.dir/clean
+.PHONY : benchmark/CMakeFiles/2dbench.dir/clean
+
+#=============================================================================
 # Target rules for target benchmark/CMakeFiles/benchmark.dir
 
 # All Build rule for target.
 benchmark/CMakeFiles/benchmark.dir/all:
 	$(MAKE) -f benchmark/CMakeFiles/benchmark.dir/build.make benchmark/CMakeFiles/benchmark.dir/depend
 	$(MAKE) -f benchmark/CMakeFiles/benchmark.dir/build.make benchmark/CMakeFiles/benchmark.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=1,2 "Built target benchmark"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=3,4 "Built target benchmark"
 .PHONY : benchmark/CMakeFiles/benchmark.dir/all
 
 # Build rule for subdir invocation for target.
@@ -424,7 +453,7 @@ benchmark/CMakeFiles/benchmark.dir/clean:
 c-interface/CMakeFiles/cpgmindexlib.dir/all:
 	$(MAKE) -f c-interface/CMakeFiles/cpgmindexlib.dir/build.make c-interface/CMakeFiles/cpgmindexlib.dir/depend
 	$(MAKE) -f c-interface/CMakeFiles/cpgmindexlib.dir/build.make c-interface/CMakeFiles/cpgmindexlib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=3,4 "Built target cpgmindexlib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=5,6 "Built target cpgmindexlib"
 .PHONY : c-interface/CMakeFiles/cpgmindexlib.dir/all
 
 # Build rule for subdir invocation for target.
@@ -451,7 +480,7 @@ c-interface/CMakeFiles/cpgmindexlib.dir/clean:
 c-interface/examples/CMakeFiles/example_updates_c.dir/all: c-interface/CMakeFiles/cpgmindexlib.dir/all
 	$(MAKE) -f c-interface/examples/CMakeFiles/example_updates_c.dir/build.make c-interface/examples/CMakeFiles/example_updates_c.dir/depend
 	$(MAKE) -f c-interface/examples/CMakeFiles/example_updates_c.dir/build.make c-interface/examples/CMakeFiles/example_updates_c.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=19,20 "Built target example_updates_c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=21,22 "Built target example_updates_c"
 .PHONY : c-interface/examples/CMakeFiles/example_updates_c.dir/all
 
 # Build rule for subdir invocation for target.
@@ -478,7 +507,7 @@ c-interface/examples/CMakeFiles/example_updates_c.dir/clean:
 c-interface/examples/CMakeFiles/example_simple_c.dir/all: c-interface/CMakeFiles/cpgmindexlib.dir/all
 	$(MAKE) -f c-interface/examples/CMakeFiles/example_simple_c.dir/build.make c-interface/examples/CMakeFiles/example_simple_c.dir/depend
 	$(MAKE) -f c-interface/examples/CMakeFiles/example_simple_c.dir/build.make c-interface/examples/CMakeFiles/example_simple_c.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=15,16 "Built target example_simple_c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=17,18 "Built target example_simple_c"
 .PHONY : c-interface/examples/CMakeFiles/example_simple_c.dir/all
 
 # Build rule for subdir invocation for target.
@@ -505,7 +534,7 @@ c-interface/examples/CMakeFiles/example_simple_c.dir/clean:
 test/CMakeFiles/tests.dir/all:
 	$(MAKE) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/depend
 	$(MAKE) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=21,22,23 "Built target tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ssuzuki/workspace/PGM/build/CMakeFiles --progress-num=23,24,25 "Built target tests"
 .PHONY : test/CMakeFiles/tests.dir/all
 
 # Build rule for subdir invocation for target.

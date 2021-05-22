@@ -213,6 +213,19 @@ example_mapped/fast:
 .PHONY : example_mapped/fast
 
 #=============================================================================
+# Target rules for targets named 2dbench
+
+# Build rule for target.
+2dbench: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 2dbench
+.PHONY : 2dbench
+
+# fast build rule for target.
+2dbench/fast:
+	$(MAKE) -f benchmark/CMakeFiles/2dbench.dir/build.make benchmark/CMakeFiles/2dbench.dir/build
+.PHONY : 2dbench/fast
+
+#=============================================================================
 # Target rules for targets named benchmark
 
 # Build rule for target.
@@ -293,6 +306,7 @@ help:
 	@echo "... example_simple"
 	@echo "... example_multiset"
 	@echo "... example_mapped"
+	@echo "... 2dbench"
 	@echo "... benchmark"
 	@echo "... cpgmindexlib"
 	@echo "... example_updates_c"

@@ -152,4 +152,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+dataset/*
+
 # End of https://www.gitignore.io/api/c++,clion,macos

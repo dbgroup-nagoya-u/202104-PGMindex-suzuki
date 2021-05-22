@@ -122,6 +122,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+benchmark/CMakeFiles/2dbench.dir/rule:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f CMakeFiles/Makefile2 benchmark/CMakeFiles/2dbench.dir/rule
+.PHONY : benchmark/CMakeFiles/2dbench.dir/rule
+
+# Convenience name for target.
+2dbench: benchmark/CMakeFiles/2dbench.dir/rule
+
+.PHONY : 2dbench
+
+# fast build rule for target.
+2dbench/fast:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/2dbench.dir/build.make benchmark/CMakeFiles/2dbench.dir/build
+.PHONY : 2dbench/fast
+
+# Convenience name for target.
 benchmark/CMakeFiles/benchmark.dir/rule:
 	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f CMakeFiles/Makefile2 benchmark/CMakeFiles/benchmark.dir/rule
 .PHONY : benchmark/CMakeFiles/benchmark.dir/rule
@@ -135,6 +150,33 @@ benchmark: benchmark/CMakeFiles/benchmark.dir/rule
 benchmark/fast:
 	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/benchmark.dir/build.make benchmark/CMakeFiles/benchmark.dir/build
 .PHONY : benchmark/fast
+
+2dbench.o: 2dbench.cpp.o
+
+.PHONY : 2dbench.o
+
+# target to build an object file
+2dbench.cpp.o:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/2dbench.dir/build.make benchmark/CMakeFiles/2dbench.dir/2dbench.cpp.o
+.PHONY : 2dbench.cpp.o
+
+2dbench.i: 2dbench.cpp.i
+
+.PHONY : 2dbench.i
+
+# target to preprocess a source file
+2dbench.cpp.i:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/2dbench.dir/build.make benchmark/CMakeFiles/2dbench.dir/2dbench.cpp.i
+.PHONY : 2dbench.cpp.i
+
+2dbench.s: 2dbench.cpp.s
+
+.PHONY : 2dbench.s
+
+# target to generate assembly for a file
+2dbench.cpp.s:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/2dbench.dir/build.make benchmark/CMakeFiles/2dbench.dir/2dbench.cpp.s
+.PHONY : 2dbench.cpp.s
 
 benchmark.o: benchmark.cpp.o
 
@@ -172,7 +214,11 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... 2dbench"
 	@echo "... benchmark"
+	@echo "... 2dbench.o"
+	@echo "... 2dbench.i"
+	@echo "... 2dbench.s"
 	@echo "... benchmark.o"
 	@echo "... benchmark.i"
 	@echo "... benchmark.s"
