@@ -964,10 +964,6 @@ algorithm
 cassert
 -
 
-/home/ssuzuki/workspace/PGM/test/main.cpp
-catch.hpp
-/home/ssuzuki/workspace/PGM/test/catch.hpp
-
 /home/ssuzuki/workspace/PGM/test/tests.cpp
 catch.hpp
 /home/ssuzuki/workspace/PGM/test/catch.hpp
