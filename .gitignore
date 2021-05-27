@@ -153,5 +153,6 @@ Temporary Items
 .apdisk
 
 dataset/*
+build/*
 
 # End of https://www.gitignore.io/api/c++,clion,macos
