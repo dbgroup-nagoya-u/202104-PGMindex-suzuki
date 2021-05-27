@@ -34,22 +34,17 @@ int main(int argc, char **argv) {
 
     int c, cardinality;
     std::string distribution,skeweness = "1";
-    static struct option long_options[] =
-    {
+    static struct option long_options[] ={
         {"cardinality" , required_argument , NULL , 'c'},
         {"distribution" , required_argument , NULL , 'd'},
     };
-    while(1)
-    {
+    while(1){
         int opt_index = 0;
         c = getopt_long(argc, argv,"c:d:z", long_options,&opt_index);
         
-        if(-1 == c)
-        {
-            break;
-        }
-        switch(c)
-        {
+        if(-1 == c) break;
+
+        switch(c){
             case 'c':
                 cardinality = atoll(optarg);
                 break;
@@ -97,6 +92,7 @@ int main(int argc, char **argv) {
     }
     std::cout << "cardinality : " << data.size() << std::endl;
     ifs.close();
+
     // Generate 2D window queries
     filepath = "../dataset/query/window/" + distribution + "_" + std::to_string(cardinality) + "_" + skeweness + "_0.000100_1.000000.csv";
     ifs.open(filepath);
@@ -143,7 +139,8 @@ int main(int argc, char **argv) {
         std::tuple<uint64_t, uint64_t> coordinate = std::make_tuple(xy[0] * cardinality, xy[1] * cardinality);
         knn_queries.push_back(coordinate);
     }
-
+    ifs.close();
+    
     // Construct the Multidimensional PGM-index
     constexpr auto dimensions = 2; // number of dimensions
     constexpr auto epsilon = 32;   // space-time trade-off parameter
