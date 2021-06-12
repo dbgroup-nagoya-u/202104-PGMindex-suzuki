@@ -18,6 +18,8 @@
 #include <chrono>
 #include "pgm/pgm_index_variants.hpp"
 
+//#define recall
+
 struct mbr{
     uint64_t x1;
     uint64_t y1;
@@ -151,15 +153,21 @@ int main(int argc, char **argv) {
     auto finish = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count();
     std::cout << "build time , " << time << std::endl;
+    std::cout << "index size [bytes] , " << pgm_2d.size_in_bytes() << std::endl;
+    std::cout << "index height , " << pgm_2d.height() << std::endl;
 
     // Point qurey for all points in PGM-index
     start = std::chrono::high_resolution_clock::now();
+    uint64_t point_collect = 0;
     for(auto point : data){
-        pgm_2d.contains({std::get<0>(point) , std::get<1>(point)});
+        if (pgm_2d.contains({std::get<0>(point) , std::get<1>(point)})){  
+            point_collect += 1;
+        }
     }
     finish = std::chrono::high_resolution_clock::now();
     double dtime = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count() * 1.0 / data.size();
     std::cout << "point query time , " << dtime << std::endl;
+    std::cout << "point query recall , " << point_collect * 1.0 / data.size() << std::endl;
 
     // Range query for 1000 times
     start = std::chrono::high_resolution_clock::now();
@@ -177,6 +185,7 @@ int main(int argc, char **argv) {
     std::cout << "window query time , " << dtime << std::endl;
 
     // ACC range query for 1000 times
+    #ifdef recall
     std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> acc_ans_window;
     for(auto window : window_queries){
         std::vector<std::tuple<uint64_t , uint64_t>> ans;
@@ -184,6 +193,7 @@ int main(int argc, char **argv) {
         acc_ans_window.push_back(ans);
     }
     std::cout << "window query recall , " << calc_recall(acc_ans_window , ans_window) << std::endl;
+    #endif
 
     // knn query for 1000 times
     std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> ans_knn;
@@ -198,6 +208,7 @@ int main(int argc, char **argv) {
     std::cout << "knn query time , " << dtime << std::endl;
 
     // ACC knn query for 1000 times
+    #ifdef recall 
     std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> acc_ans_knn;
     for(auto point : knn_queries){
         std::vector<std::tuple<uint64_t , uint64_t>> ans;
@@ -205,6 +216,7 @@ int main(int argc, char **argv) {
         acc_ans_knn.push_back(ans);
     }
     std::cout << "knn query recall , " << calc_recall(acc_ans_knn , ans_knn) << std::endl;
+    #endif
 
     return 0;
 }

@@ -1016,6 +1016,9 @@ public:
             }
         }
     }
+    size_t height() const {
+        return pgm.height();
+    }
 private:
 
     class RangeIterator {
