@@ -122,6 +122,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+benchmark/CMakeFiles/cmpknn.dir/rule:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f CMakeFiles/Makefile2 benchmark/CMakeFiles/cmpknn.dir/rule
+.PHONY : benchmark/CMakeFiles/cmpknn.dir/rule
+
+# Convenience name for target.
+cmpknn: benchmark/CMakeFiles/cmpknn.dir/rule
+
+.PHONY : cmpknn
+
+# fast build rule for target.
+cmpknn/fast:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/cmpknn.dir/build.make benchmark/CMakeFiles/cmpknn.dir/build
+.PHONY : cmpknn/fast
+
+# Convenience name for target.
 benchmark/CMakeFiles/2dbench.dir/rule:
 	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f CMakeFiles/Makefile2 benchmark/CMakeFiles/2dbench.dir/rule
 .PHONY : benchmark/CMakeFiles/2dbench.dir/rule
@@ -205,6 +220,33 @@ benchmark.cpp.s:
 	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/benchmark.dir/build.make benchmark/CMakeFiles/benchmark.dir/benchmark.cpp.s
 .PHONY : benchmark.cpp.s
 
+cmpknn.o: cmpknn.cpp.o
+
+.PHONY : cmpknn.o
+
+# target to build an object file
+cmpknn.cpp.o:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/cmpknn.dir/build.make benchmark/CMakeFiles/cmpknn.dir/cmpknn.cpp.o
+.PHONY : cmpknn.cpp.o
+
+cmpknn.i: cmpknn.cpp.i
+
+.PHONY : cmpknn.i
+
+# target to preprocess a source file
+cmpknn.cpp.i:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/cmpknn.dir/build.make benchmark/CMakeFiles/cmpknn.dir/cmpknn.cpp.i
+.PHONY : cmpknn.cpp.i
+
+cmpknn.s: cmpknn.cpp.s
+
+.PHONY : cmpknn.s
+
+# target to generate assembly for a file
+cmpknn.cpp.s:
+	cd /home/ssuzuki/workspace/PGM/build && $(MAKE) -f benchmark/CMakeFiles/cmpknn.dir/build.make benchmark/CMakeFiles/cmpknn.dir/cmpknn.cpp.s
+.PHONY : cmpknn.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -214,6 +256,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... cmpknn"
 	@echo "... 2dbench"
 	@echo "... benchmark"
 	@echo "... 2dbench.o"
@@ -222,6 +265,9 @@ help:
 	@echo "... benchmark.o"
 	@echo "... benchmark.i"
 	@echo "... benchmark.s"
+	@echo "... cmpknn.o"
+	@echo "... cmpknn.i"
+	@echo "... cmpknn.s"
 .PHONY : help
 
 

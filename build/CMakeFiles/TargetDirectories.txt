@@ -17,6 +17,7 @@
 /home/ssuzuki/workspace/PGM/build/benchmark/CMakeFiles/rebuild_cache.dir
 /home/ssuzuki/workspace/PGM/build/benchmark/CMakeFiles/edit_cache.dir
 /home/ssuzuki/workspace/PGM/build/benchmark/CMakeFiles/test.dir
+/home/ssuzuki/workspace/PGM/build/benchmark/CMakeFiles/cmpknn.dir
 /home/ssuzuki/workspace/PGM/build/benchmark/CMakeFiles/2dbench.dir
 /home/ssuzuki/workspace/PGM/build/benchmark/CMakeFiles/benchmark.dir
 /home/ssuzuki/workspace/PGM/build/c-interface/CMakeFiles/rebuild_cache.dir

@@ -977,6 +977,61 @@ public:
      */
     iterator range(const value_type &min, const value_type &max) { return iterator(this, min, max); }
     
+    std::vector<std::tuple<uint64_t , uint64_t>> knn_proposed(const value_type &p , int k){
+        uint64_t n = this->data.size();
+        auto zp = encode(p);
+        auto range = pgm.search(zp);
+        auto it = std::lower_bound(data.begin() + range.lo, data.begin() + range.hi, zp);
+        
+        std::vector<std::tuple<uint64_t , uint64_t>> tans;
+        for (auto i = it - k >= data.begin() ? it - k : data.begin(); i != it + k && i != data.end(); ++i){
+            //std::cout << *i << std::endl;
+            tans.push_back(morton::Decode(*i));
+        }
+
+        auto dist = [&](std::tuple<uint64_t , uint64_t> point){
+            return std::sqrt(std::pow(std::abs(int64_t(std::get<0>(p) - std::get<0>(point))) , 2) + std::pow(std::abs(int64_t(std::get<1>(p) - std::get<1>(point))) , 2));
+        };
+        std::sort(tans.begin(), tans.end(),[&](auto const& lhs, auto const& rhs) {
+                    double dist_l = dist(lhs);
+                    double dist_r = dist(rhs);
+                    return dist_l < dist_r;
+        });
+        uint64_t knn_query_side = dist(tans[k - 1]) + 1;
+        auto mbr =[&]() -> std::tuple<uint64_t , uint64_t , uint64_t , uint64_t>{
+            uint64_t x1 = std::max<int64_t>((int64_t)std::get<0>(p) - knn_query_side , 0);
+            uint64_t y1 = std::max<int64_t>((int64_t)std::get<1>(p) - knn_query_side , 0);
+            uint64_t x2 = std::min<int64_t>((int64_t)std::get<0>(p) + knn_query_side , n);
+            uint64_t y2 = std::min<int64_t>((int64_t)std::get<1>(p) + knn_query_side , n);
+            std::tuple<uint64_t , uint64_t , uint64_t , uint64_t> ret = std::make_tuple(x1 , y1 , x2 , y2);
+            return ret;
+        };
+        while(1){
+            auto mbr_knn = mbr();
+            std::vector<std::tuple<uint64_t , uint64_t>> ret;
+            for (auto it = this->range({std::get<0>(mbr_knn) , std::get<1>(mbr_knn)}, {std::get<2>(mbr_knn) , std::get<3>(mbr_knn)}); it != this->end(); ++it)
+                ret.push_back(*it);
+            //std::cout << ret.size() << " ";
+            if(ret.size() >= k){
+                std::sort(ret.begin() , ret.end() , [&](auto const& lhs, auto const& rhs) {
+                    double dist_l = dist(lhs);
+                    double dist_r = dist(rhs);
+                    return dist_l < dist_r;
+                });
+                auto farthest = dist(ret[k - 1]);
+                if(farthest <= knn_query_side){
+                    auto bn = ret.begin();
+                    auto en = ret.begin() + k;
+                    std::vector<std::tuple<uint64_t , uint64_t>> res{bn , en};
+                    return res;
+                }
+                knn_query_side = knn_query_side * pow(2,0.5) + 1;
+            }else{
+                knn_query_side *= 2;
+            }
+        }
+    }
+
     std::vector<std::tuple<uint64_t , uint64_t>> knn(const value_type &p , int k){
         uint64_t n = this->data.size();
         uint64_t knn_query_side = std::sqrt(k * n) * 0.25;

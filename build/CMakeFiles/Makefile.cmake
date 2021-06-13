@@ -70,6 +70,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "examples/CMakeFiles/example_simple.dir/DependInfo.cmake"
   "examples/CMakeFiles/example_multiset.dir/DependInfo.cmake"
   "examples/CMakeFiles/example_mapped.dir/DependInfo.cmake"
+  "benchmark/CMakeFiles/cmpknn.dir/DependInfo.cmake"
   "benchmark/CMakeFiles/2dbench.dir/DependInfo.cmake"
   "benchmark/CMakeFiles/benchmark.dir/DependInfo.cmake"
   "c-interface/CMakeFiles/cpgmindexlib.dir/DependInfo.cmake"
