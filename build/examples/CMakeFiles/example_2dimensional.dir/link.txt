@@ -1,1 +1,0 @@
-/usr/bin/c++   -march=native -O3 -DNDEBUG   CMakeFiles/example_2dimensional.dir/2dimensional.cpp.o  -o example_2dimensional  /usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so /usr/lib/x86_64-linux-gnu/libpthread.so 
