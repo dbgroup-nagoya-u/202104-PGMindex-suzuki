@@ -200,7 +200,7 @@ int main(int argc, char **argv) {
     start = std::chrono::high_resolution_clock::now();
     for(auto point : knn_queries){
         //std::vector<std::tuple<uint64_t , uint64_t>> ans;
-        auto ans = pgm_2d.knn_proposed({std::get<0>(point) , std::get<1>(point)} , 25);
+        auto ans = pgm_2d.knn({std::get<0>(point) , std::get<1>(point)} , 25);
         ans_knn.push_back(ans);
         //std::cout << ans_knn.size() << std::endl;
     }

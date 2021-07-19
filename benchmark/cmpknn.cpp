@@ -163,7 +163,7 @@ int main(int argc, char **argv) {
         auto finish = std::chrono::high_resolution_clock::now();
         auto dtime = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count() * 1.0 / knn_queries.size();
         std::cout << "knn query time , " << dtime << std::endl;
-
+/*
         // proposed knn query for 1000 times
         std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> ans_knn_proposed;
         start = std::chrono::high_resolution_clock::now();
@@ -176,7 +176,7 @@ int main(int argc, char **argv) {
         finish = std::chrono::high_resolution_clock::now();
         dtime = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count() * 1.0 / knn_queries.size();
         std::cout << "proposed knn query time , " << dtime << std::endl;
-
+*/
         // ACC knn query for 1000 times
         #ifdef recall 
         std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> acc_ans_knn;
