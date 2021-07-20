@@ -977,6 +977,14 @@ public:
      */
     iterator range(const value_type &min, const value_type &max) { return iterator(this, min, max); }
     
+    /**
+     * (maybe approximate) k-nearest neighbor query.
+     * Returns @p k nearest points from query point @p p.
+     * 
+     * @param p the query point.
+     * @param k the number of nearest points.
+     * @return a vector of k nearest points.
+     */
     std::vector<value_type> knn(const value_type &p, uint32_t k){
         // to access coordinate of point dynamically
         using swallow = int[];
@@ -1031,11 +1039,11 @@ public:
             return dist_l < dist_r;
         });
 
-        // calc distance of k nearest point from p, and get a range that contains more than k points around p
+        // calc distance of k nearest point in tmp_ans, and get a range(hyperrectangle) that contains more than k points around p
         uint64_t k_range_dist = dist_from_p(tmp_ans[k - 1], sequence) + 1;
         value_type first = k_range_first(k_range_dist, sequence);
         value_type end = k_range_end(k_range_dist, sequence);
-
+        
         // execute range query and get k nearest points
         std::vector<value_type> ans;
         for (auto it = this->range(first, end); it != this->end(); ++it)
