@@ -978,42 +978,35 @@ public:
     iterator range(const value_type &min, const value_type &max) { return iterator(this, min, max); }
     
     auto knn(const value_type &p, uint32_t k){
-        auto zp = encode(p);
-        auto range = pgm.search(zp);
-        auto it = std::lower_bound(data.begin() + range.lo, data.begin() + range.hi, zp);
-
-        std::vector<value_type> tmp_ans;
-        for (auto i = it - k >= data.begin() ? it - k : data.begin(); i != it + k && i != data.end(); ++i){
-            tmp_ans.push_back(morton::Decode(*i));
-        }
+        using swallow = int[];
+        auto sequence = std::make_index_sequence<Dimensions>{};
 
         auto dist_from_p = [&]<std::size_t... indices>(value_type point, std::index_sequence<indices...>){
             uint64_t squared_sum = 0;
-            using swallow = int[];
             swallow{
                 (squared_sum += std::pow((int64_t)std::get<indices>(point) - (int64_t)std::get<indices>(p), 2), 0)...
             };
             return std::sqrt(squared_sum);
         };
+
         auto k_range_first = [&]<std::size_t... indices>(uint64_t dist, std::index_sequence<indices...>) -> value_type{
             value_type point;
-            using swallow = int[];
             swallow{
                 (std::get<indices>(point) = std::max<int64_t>((int64_t)std::get<indices>(p) - dist, 0), 0)...
             };       
             return point;
         };
+
         auto k_range_end = [&]<std::size_t... indices>(uint64_t dist, std::index_sequence<indices...>) -> value_type{
             value_type point;
-            using swallow = int[];
             swallow{
                 (std::get<indices>(point) = std::min(std::get<indices>(p) + dist, this->data.size()), 0)...
             };            
             return point;
         };
+
         auto print_point = [&]<std::size_t... indices>(value_type point, std::index_sequence<indices...>) -> int {
             std::cout << "(";
-            using swallow = int[];
             swallow{
                 (std::cout << std::get<indices>(point) << " , ", 0)...
             };
@@ -1021,23 +1014,31 @@ public:
             return 0;
         };
 
+        auto zp = encode(p);
+        auto range = pgm.search(zp);
+        auto it = std::lower_bound(data.begin() + range.lo, data.begin() + range.hi, zp);
+
+        std::vector<value_type> tmp_ans;
+        for (auto i = it - k >= data.begin() ? it - k : data.begin(); i != it + k && i != data.end(); ++i)
+            tmp_ans.push_back(morton::Decode(*i));
+
         std::sort(tmp_ans.begin(), tmp_ans.end(), [&](auto const& lhs, auto const& rhs) {
-            double dist_l = dist_from_p(lhs, std::make_index_sequence<Dimensions>{});
-            double dist_r = dist_from_p(rhs, std::make_index_sequence<Dimensions>{});
+            double dist_l = dist_from_p(lhs, sequence);
+            double dist_r = dist_from_p(rhs, sequence);
             return dist_l < dist_r;
         });
 
-        uint64_t k_range_dist = dist_from_p(tmp_ans[k - 1], std::make_index_sequence<Dimensions>{}) + 1;
-        value_type first = k_range_first(k_range_dist, std::make_index_sequence<Dimensions>{});
-        value_type end = k_range_end(k_range_dist, std::make_index_sequence<Dimensions>{});
+        uint64_t k_range_dist = dist_from_p(tmp_ans[k - 1], sequence) + 1;
+        value_type first = k_range_first(k_range_dist, sequence);
+        value_type end = k_range_end(k_range_dist, sequence);
         
         std::vector<value_type> ans;
         for (auto it = this->range(first, end); it != this->end(); ++it)
             ans.push_back(*it);
 
         std::sort(ans.begin(), ans.end(), [&](auto const& lhs, auto const& rhs) {
-            double dist_l = dist_from_p(lhs, std::make_index_sequence<Dimensions>{});
-            double dist_r = dist_from_p(rhs, std::make_index_sequence<Dimensions>{});
+            double dist_l = dist_from_p(lhs, sequence);
+            double dist_r = dist_from_p(rhs, sequence);
             return dist_l < dist_r;
         });
         
