@@ -1,10 +1,7 @@
 /*
- * This example shows how to use pgm::MultidimensionalPGMIndex, a container supporting orthogonal range queries
- * in k dimensions. To run it, your CPU must support the BMI2 instruction set.
- * Compile with:
- *   g++ multidimensional.cpp -std=c++17 -I../include -o multidimensional
- * Run with:
- *   ./multidimensional
+ * Comparison of k-nearest neighbor(knn) query algorithm.
+ * A new knn query is which I propose.
+ * Old knn query is proposed at Effectively Learning Spatial Indices[VLDB2020].
  */
 
 #include <vector>
@@ -151,7 +148,7 @@ int main(int argc, char **argv) {
 
     for (int k : ks){
         std::cout << "k : " << k << " -------- " << std::endl; 
-        // knn query for 1000 times
+        // new knn query for 1000 times
         std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> ans_knn;
         auto start = std::chrono::high_resolution_clock::now();
         for(auto point : knn_queries){
@@ -162,21 +159,21 @@ int main(int argc, char **argv) {
         }
         auto finish = std::chrono::high_resolution_clock::now();
         auto dtime = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count() * 1.0 / knn_queries.size();
-        std::cout << "knn query time , " << dtime << std::endl;
-/*
-        // proposed knn query for 1000 times
-        std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> ans_knn_proposed;
+        std::cout << "new knn query time , " << dtime << std::endl;
+
+        // old knn query for 1000 times
+        std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> ans_knn_old;
         start = std::chrono::high_resolution_clock::now();
         for(auto point : knn_queries){
             //std::vector<std::tuple<uint64_t , uint64_t>> ans;
-            auto ans = pgm_2d.knn_proposed({std::get<0>(point) , std::get<1>(point)} , k);
-            ans_knn_proposed.push_back(ans);
+            auto ans = pgm_2d.knn_old({std::get<0>(point) , std::get<1>(point)} , k);
+            ans_knn_old.push_back(ans);
             //std::cout << ans.size() << std::endl;
         }
         finish = std::chrono::high_resolution_clock::now();
         dtime = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count() * 1.0 / knn_queries.size();
-        std::cout << "proposed knn query time , " << dtime << std::endl;
-*/
+        std::cout << "old knn query time , " << dtime << std::endl;
+
         // ACC knn query for 1000 times
         #ifdef recall 
         std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> acc_ans_knn;
@@ -186,7 +183,7 @@ int main(int argc, char **argv) {
             acc_ans_knn.push_back(ans);
         }
         std::cout << "knn query recall , " << calc_recall(acc_ans_knn , ans_knn) << std::endl;
-        std::cout << "proposed knn query recall , " << calc_recall(acc_ans_knn_proposed , ans_knn) << std::endl;
+        std::cout << "old knn query recall , " << calc_recall(acc_ans_knn_old , ans_knn) << std::endl;
         #endif
     }
     return 0;

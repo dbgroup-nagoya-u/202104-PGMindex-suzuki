@@ -1058,6 +1058,64 @@ public:
         return std::vector<value_type> {ans.begin(), ans.begin() + k};
     }
 
+    /**
+     * @brief knn query proposed at Effectively Learning Spatial Indices[VLDB2020]
+     */
+    std::vector<value_type> knn_old(const value_type &p, uint32_t k){
+        // to access coordinate of point dynamically
+        using swallow = int[];
+        auto sequence = std::make_index_sequence<Dimensions>{};
+        uint64_t n = this->data.size();
+        uint64_t k_range_dist = std::sqrt(k * n) * 0.25;
+        
+        
+        // return euclidean distance between given point and query point p
+        auto dist_from_p = [&]<std::size_t... indices>(value_type point, std::index_sequence<indices...>){
+            uint64_t squared_sum = 0;
+            squared_sum = (std::pow((int64_t)std::get<indices>(point) - (int64_t)std::get<indices>(p), 2) + ... );
+            return std::sqrt(squared_sum);
+        };
+
+        // return first point of range query for knn query
+        auto k_range_first = [&]<std::size_t... indices>(uint64_t dist, std::index_sequence<indices...>) -> value_type{
+            value_type point;
+            swallow{
+                (std::get<indices>(point) = std::max<int64_t>((int64_t)std::get<indices>(p) - dist, 0), 0)...
+            };
+            return point;
+        };
+
+        // return end point of range query for knn query
+        auto k_range_end = [&]<std::size_t... indices>(uint64_t dist, std::index_sequence<indices...>) -> value_type{
+            value_type point;
+            swallow{
+                (std::get<indices>(point) = std::min(std::get<indices>(p) + dist, this->data.size()), 0)...
+            };
+            return point;
+        };
+
+        while(1){
+            std::vector<value_type> ans;
+            value_type first = k_range_first(k_range_dist, sequence);
+            value_type end = k_range_end(k_range_dist, sequence);
+            for (auto it = this->range(first, end); it != this->end(); ++it)
+                ans.push_back(*it);
+            if(ans.size() >= k){
+                std::sort(ans.begin() , ans.end() , [&](auto const& lhs, auto const& rhs) {
+                    double dist_l = dist_from_p(lhs, sequence);
+                    double dist_r = dist_from_p(rhs, sequence);
+                    return dist_l < dist_r;
+                });
+                auto farthest = dist_from_p(ans[k - 1], sequence);
+                if(farthest <= k_range_dist)
+                    return std::vector<value_type> {ans.begin(), ans.begin() + k};
+                k_range_dist *= pow(2,0.5);
+            }else{
+                k_range_dist *= 2;
+            }
+        }
+    }
+
     size_t height() const {
         return pgm.height();
     }
