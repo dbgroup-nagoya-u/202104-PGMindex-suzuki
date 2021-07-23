@@ -1,10 +1,6 @@
 /*
- * This example shows how to use pgm::MultidimensionalPGMIndex, a container supporting orthogonal range queries
- * in k dimensions. To run it, your CPU must support the BMI2 instruction set.
- * Compile with:
- *   g++ multidimensional.cpp -std=c++17 -I../include -o multidimensional
- * Run with:
- *   ./multidimensional
+ * Benchmark of MultiDimensionalPGM-index using 2-dimensional dataset.
+ * 
  */
 
 #include <vector>
