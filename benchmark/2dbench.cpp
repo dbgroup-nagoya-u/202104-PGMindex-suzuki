@@ -1,10 +1,6 @@
 /*
- * This example shows how to use pgm::MultidimensionalPGMIndex, a container supporting orthogonal range queries
- * in k dimensions. To run it, your CPU must support the BMI2 instruction set.
- * Compile with:
- *   g++ multidimensional.cpp -std=c++17 -I../include -o multidimensional
- * Run with:
- *   ./multidimensional
+ * Benchmark of MultiDimensionalPGM-index using 2-dimensional dataset.
+ * 
  */
 
 #include <vector>
@@ -200,7 +196,7 @@ int main(int argc, char **argv) {
     start = std::chrono::high_resolution_clock::now();
     for(auto point : knn_queries){
         //std::vector<std::tuple<uint64_t , uint64_t>> ans;
-        auto ans = pgm_2d.knn_proposed({std::get<0>(point) , std::get<1>(point)} , 25);
+        auto ans = pgm_2d.knn({std::get<0>(point) , std::get<1>(point)} , 25);
         ans_knn.push_back(ans);
         //std::cout << ans_knn.size() << std::endl;
     }
