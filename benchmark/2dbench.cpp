@@ -16,12 +16,8 @@
 
 //#define recall
 
-struct mbr{
-    uint64_t x1;
-    uint64_t y1;
-    uint64_t x2;
-    uint64_t y2;
-};
+std::string path_to_dataset = "../../dataset/";
+std::string path_to_query = "../../dataset/query/";
 
 std::vector<std::tuple<uint64_t, uint64_t>> acc_window(std::tuple<uint64_t , uint64_t , uint64_t , uint64_t> &window, std::vector<std::tuple<uint64_t, uint64_t>> &data);
 std::vector<std::tuple<uint64_t, uint64_t>> acc_knn(std::tuple<uint64_t , uint64_t> query_point, std::vector<std::tuple<uint64_t, uint64_t>> &data , int k);
@@ -58,11 +54,13 @@ int main(int argc, char **argv) {
         cardinality = 2030818;
     }else if(distribution == "china"){
         cardinality = 2677695;
+    }else if(distribution == "usa"){
+        cardinality = 17383488;
     }else{
         cardinality = 10000000;
     }
 
-    std::string filepath = "../dataset/" + distribution + "_" + std::to_string(cardinality) + "_" + skeweness + "_2_.csv";
+    std::string filepath = path_to_dataset + distribution + "_" + std::to_string(cardinality) + "_" + skeweness + "_2_.csv";
     std::ifstream ifs(filepath);
     std::string str_buf;
 
@@ -92,7 +90,7 @@ int main(int argc, char **argv) {
     ifs.close();
 
     // Generate 2D window queries
-    filepath = "../dataset/query/window/" + distribution + "_" + std::to_string(cardinality) + "_" + skeweness + "_0.000100_1.000000.csv";
+    filepath = path_to_query + "window/" + distribution + "_" + std::to_string(cardinality) + "_" + skeweness + "_0.000100_1.000000.csv";
     ifs.open(filepath);
 
     if (!ifs){
@@ -116,7 +114,7 @@ int main(int argc, char **argv) {
     ifs.close();
 
     // Generate 2D knn queries
-    filepath = "../dataset/query/knn/" + distribution + "_" + std::to_string(cardinality) + "_" + skeweness + ".csv";
+    filepath = path_to_query + "knn/" + distribution + "_" + std::to_string(cardinality) + "_" + skeweness + ".csv";
     ifs.open(filepath);
 
     if (!ifs){
