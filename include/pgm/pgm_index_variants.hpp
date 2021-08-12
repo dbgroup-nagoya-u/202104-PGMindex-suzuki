@@ -892,7 +892,9 @@ private:
 template<uint8_t Dimensions, typename T, size_t Epsilon, size_t EpsilonRecursive = 4, typename Floating = float>
 class MultidimensionalPGMIndex {
     std::vector<T> data;
-    PGMIndex<T, Epsilon, EpsilonRecursive, Floating> pgm;
+    //EliasFanoPGMIndex<T, Epsilon> pgm;
+    //BucketingPGMIndex<T, Epsilon> pgm;
+    PGMIndex<T, Epsilon, EpsilonRecursive, Floating> pgm; // defalut
 
     using morton = mortonnd::MortonNDBmi<Dimensions, T>;
     static constexpr auto selector = mortonnd::BuildSelector<morton::FieldBits>(Dimensions);
