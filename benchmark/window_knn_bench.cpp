@@ -14,7 +14,7 @@
 #include <chrono>
 #include "pgm/pgm_index_variants.hpp"
 
-#define QUERY_TIMES 10
+#define QUERY_TIMES 1
 
 std::string path_to_dataset = "../../dataset/";
 std::string path_to_query = "../../dataset/query/";
