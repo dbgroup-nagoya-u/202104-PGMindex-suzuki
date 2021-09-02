@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
             i++;
         }
         std::tuple<uint64_t, uint64_t> coordinate = std::make_tuple(xy[0] * cardinality, xy[1] * cardinality);            
-        data.push_back(coordinate);
+        data.emplace_back(coordinate);
     }
     std::cout << "cardinality : " << data.size() << std::endl;
     ifs.close();
@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
             i++;
         }
         std::tuple<uint64_t, uint64_t, uint64_t, uint64_t> window = std::make_tuple(xy[0] * cardinality, xy[1] * cardinality, xy[2] * cardinality, xy[3] * cardinality);
-        window_queries.push_back(window);
+        window_queries.emplace_back(window);
     }
     ifs.close();
 
@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
             i++;
         }
         std::tuple<uint64_t, uint64_t> coordinate = std::make_tuple(xy[0] * cardinality, xy[1] * cardinality);
-        knn_queries.push_back(coordinate);
+        knn_queries.emplace_back(coordinate);
     }
     ifs.close();
     
@@ -164,15 +164,16 @@ int main(int argc, char **argv) {
     std::cout << "point query recall , " << point_collect * 1.0 / data.size() << std::endl;
 
     // Range query for 1000 times
-    start = std::chrono::high_resolution_clock::now();
     std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> ans_window;
+    start = std::chrono::high_resolution_clock::now();
+
     for(auto window : window_queries){
         std::vector<std::tuple<uint64_t , uint64_t>> ans;
         for (auto it = pgm_2d.range({std::get<0>(window) , std::get<1>(window)}, {std::get<2>(window) , std::get<3>(window)}); it != pgm_2d.end(); ++it)
-            //std::cout << "(" << std::get<0>(*it) << "," << std::get<1>(*it) << ") ";
-            ans.push_back(*it);
-        ans_window.push_back(ans);
-        //pgm_2d.range({std::get<0>(window) , std::get<1>(window)}, {std::get<2>(window) , std::get<3>(window)});
+            ans.emplace_back(*it);
+        #ifdef recall
+        ans_window.emplace_back(ans);
+        #endif
     }
     finish = std::chrono::high_resolution_clock::now();
     dtime = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count() * 1.0 / window_queries.size();
@@ -184,7 +185,7 @@ int main(int argc, char **argv) {
     for(auto window : window_queries){
         std::vector<std::tuple<uint64_t , uint64_t>> ans;
         ans = acc_window(window , data);
-        acc_ans_window.push_back(ans);
+        acc_ans_window.emplace_back(ans);
     }
     std::cout << "window query recall , " << calc_recall(acc_ans_window , ans_window) << std::endl;
     #endif
@@ -193,10 +194,10 @@ int main(int argc, char **argv) {
     std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> ans_knn;
     start = std::chrono::high_resolution_clock::now();
     for(auto point : knn_queries){
-        //std::vector<std::tuple<uint64_t , uint64_t>> ans;
         auto ans = pgm_2d.knn({std::get<0>(point) , std::get<1>(point)} , 25);
-        ans_knn.push_back(ans);
-        //std::cout << ans_knn.size() << std::endl;
+        #ifdef recall
+        ans_knn.emplace_back(ans);
+        #endif
     }
     finish = std::chrono::high_resolution_clock::now();
     dtime = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start).count() * 1.0 / knn_queries.size();
@@ -208,7 +209,7 @@ int main(int argc, char **argv) {
     for(auto point : knn_queries){
         std::vector<std::tuple<uint64_t , uint64_t>> ans;
         ans = acc_knn(point , data , 25);
-        acc_ans_knn.push_back(ans);
+        acc_ans_knn.emplace_back(ans);
     }
     std::cout << "knn query recall , " << calc_recall(acc_ans_knn , ans_knn) << std::endl;
     #endif
@@ -219,7 +220,7 @@ int main(int argc, char **argv) {
 std::vector<std::tuple<uint64_t, uint64_t>> acc_window(std::tuple<uint64_t , uint64_t , uint64_t , uint64_t> &window, std::vector<std::tuple<uint64_t, uint64_t>> &data){
     std::vector<std::tuple<uint64_t, uint64_t>> ans;
     for (auto point : data){
-        if(contains(window , point)) ans.push_back(point);
+        if(contains(window , point)) ans.emplace_back(point);
     }
     return ans;
 }
@@ -242,7 +243,7 @@ double calc_recall(std::vector<std::vector<std::tuple<uint64_t, uint64_t>>> &acc
             uint64_t ans_x = std::get<0>(acc_point);
             uint64_t ans_y = std::get<1>(acc_point);
             if(ans.count(ans_x) == 0) ans.insert(std::pair<uint64_t,std::vector<uint64_t>> (ans_x, std::vector<uint64_t>()));
-            ans[ans_x].push_back(ans_y);
+            ans[ans_x].emplace_back(ans_y);
         }
         for(auto pred_point : pred[i]){
             uint64_t pred_x = std::get<0>(pred_point);

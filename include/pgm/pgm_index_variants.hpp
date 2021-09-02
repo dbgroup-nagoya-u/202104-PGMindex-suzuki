@@ -1033,7 +1033,7 @@ public:
 
         std::vector<value_type> tmp_ans;
         for (auto i = it - k >= data.begin() ? it - k : data.begin(); i != it + k && i != data.end(); ++i)
-            tmp_ans.push_back(morton::Decode(*i));
+            tmp_ans.emplace_back(morton::Decode(*i));
 
         std::sort(tmp_ans.begin(), tmp_ans.end(), [&](auto const& lhs, auto const& rhs) {
             double dist_l = dist_from_p(lhs, sequence);
@@ -1049,7 +1049,7 @@ public:
         // execute range query and get k nearest points
         std::vector<value_type> ans;
         for (auto it = this->range(first, end); it != this->end(); ++it)
-            ans.push_back(*it);
+            ans.emplace_back(*it);
 
         std::sort(ans.begin(), ans.end(), [&](auto const& lhs, auto const& rhs) {
             double dist_l = dist_from_p(lhs, sequence);
@@ -1101,7 +1101,7 @@ public:
             value_type first = k_range_first(k_range_dist, sequence);
             value_type end = k_range_end(k_range_dist, sequence);
             for (auto it = this->range(first, end); it != this->end(); ++it)
-                ans.push_back(*it);
+                ans.emplace_back(*it);
             if(ans.size() >= k){
                 std::sort(ans.begin() , ans.end() , [&](auto const& lhs, auto const& rhs) {
                     double dist_l = dist_from_p(lhs, sequence);
